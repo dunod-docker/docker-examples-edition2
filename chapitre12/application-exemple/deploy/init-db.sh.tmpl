@@ -1,0 +1,12 @@
+#!/bin/bash
+
+ORIGINDIR=$PWD
+BASEDIR=$(dirname $0)
+
+cd $BASEDIR
+
+# Nous utilisons le client pour exécuter le script SQL dans notre instance distante
+kubectl exec -ti init-db /bin/bash -c "/usr/bin/mysql -v -u root -proot < /schema.sql"
+
+# Nous copions les fichiers initialisés dans le disque monté et noous changeons le propriétaire des fichiers
+kubectl exec -ti init-db /bin/bash -c "cp -r /var/lib/mysql/* /opt/data && chown -r mysql.mysql /opt/data"

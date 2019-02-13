@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appex-back-end
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appex-back-end
+  template:
+    metadata:
+      labels:
+        app: appex-back-end
+    spec:
+      containers:
+        - image: ${DOCKER_HUB_ACCOUNT}/k8-back-end
+          name: appex-back-end
+          volumeMounts:
+            - mountPath: "/chargement"
+              name: chargement
+          imagePullPolicy: Always
+      volumes:
+      - name: chargement
+        persistentVolumeClaim:
+          claimName: chargement-volume-claim

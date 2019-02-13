@@ -1,0 +1,50 @@
+version: "3"
+services:
+  database:
+    image: "appex-multi/database"
+    container_name: appex-db
+    environment:
+    - MYSQL_ROOT_PASSWORD
+    networks:
+      - appex-network
+    volumes:
+      - appex-db-volume:/var/lib/mysql
+
+  initdb:
+    build: "initdb"
+    environment:
+    - MYSQL_ROOT_PASSWORD
+    command: /bin/sh -c '/wait-for-it.sh appex-db:3306 -t 20 -- /usr/bin/mysql -v -h appex-db -u root -p${MYSQL_ROOT_PASSWORD} < /schema.sql'
+    depends_on:
+      - database
+    networks:
+      - appex-network
+
+  front-end:
+    image: "appex-multi/front-end"
+    container_name: appex-front-end
+    depends_on:
+      - initdb
+    ports:
+      - "8080:8080"
+    networks:
+      - appex-network
+    volumes:
+      - appex-upload-files:/chargement
+
+  back-end:
+    image: "appex-multi/back-end"
+    container_name: appex-back-end
+    depends_on:
+      - initdb
+    networks:
+      - appex-network
+    volumes:
+      - appex-upload-files:/chargement
+
+networks:
+  appex-network:
+
+volumes:
+  appex-upload-files:
+  appex-db-volume:

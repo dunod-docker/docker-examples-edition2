@@ -1,0 +1,15 @@
+#!/bin/bash
+
+ORIGINDIR=$PWD
+BASEDIR=$(dirname $0)
+
+cd $BASEDIR
+
+docker login -u ${DOCKER_HUB_ACCOUNT}
+
+#Push des images sur le Docker Hub
+docker push ${DOCKER_HUB_ACCOUNT}/k8-database
+docker push ${DOCKER_HUB_ACCOUNT}/k8-back-end
+docker push ${DOCKER_HUB_ACCOUNT}/k8-front-end
+
+docker logout

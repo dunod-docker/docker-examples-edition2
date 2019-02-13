@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  web:
+    image: nginx
+    ports:
+      - "8081:80"
+    configs:
+      - source: nginx-config
+        target: /etc/nginx/conf.d/http.conf
+        mode: 0440
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - php-fpm
+    networks:
+      - stack-net
+  
+  php-fpm:
+    image: bitnami/php-fpm
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    networks:
+      - stack-net
+  
+networks:
+  stack-net:
+
+configs:
+  nginx-config:
+    external: true

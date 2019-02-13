@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appex-front-end
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: appex-front-end
+  template:
+    metadata:
+      labels:
+        app: appex-front-end
+    spec:
+      containers:
+        - image: ${DOCKER_HUB_ACCOUNT}/k8-front-end
+          name: appex-front-end
+          volumeMounts:
+            - mountPath: "/chargement"
+              name: chargement
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: web
+              protocol: TCP
+      volumes:
+      - name: chargement
+        persistentVolumeClaim:
+          claimName: chargement-volume-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appex-front-end
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: appex-front-end

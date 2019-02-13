@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head th:replace="layout.html :: header (titre='Page de login')">
+    </head>
+    <body>
+    	<div th:replace="layout.html :: menu"></div>
+		<div class="container-fluid" style="margin-top: 2em;">
+			<div class="row">
+				<div class="col">
+					<div class="alert alert-danger" role="alert" th:if="${param.error}">
+			            Login ou mot de passe invalide !
+			        </div>
+			        <div class="alert alert-warning" role="alert" th:if="${param.logout}">
+			            Vous avez été déconnectés !
+			        </div>
+		        </div>
+	        </div>
+			<div class="row">
+				<div class="col-4">
+				</div>
+				<div class="col-4">
+					<div class="text-center">
+						<h1>Connectez-vous</h1>
+				        <form th:action="@{/login}" method="post">
+				            <input type="text" id="username" class="form-control" placeholder="Login" name="username"/>
+				            <input type="password" id="password" class="form-control" placeholder="Mot de passe" name="password"/>
+				            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Authentification"/>
+				        </form>
+			        </div>
+		        </div>
+		        <div class="col-4">
+				</div>
+			</div>
+		</div>
+        <div th:replace="layout.html :: footer"></div>
+    </body>
+</html>

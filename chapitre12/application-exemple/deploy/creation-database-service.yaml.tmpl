@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appex-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appex-database
+  template:
+    metadata:
+      labels:
+        app: appex-database
+    spec:
+      containers:
+        - image: ${DOCKER_HUB_ACCOUNT}/k8-database
+          name: appex-database
+          volumeMounts:
+            - mountPath: "/var/lib/mysql"
+              name: mysql-files
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3306
+              name: mysql
+              protocol: TCP
+      volumes:
+      - name: mysql-files
+        persistentVolumeClaim:
+          claimName: database-volume-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appex-database
+spec:
+  ports:
+  - port: 3306
+    targetPort : 3306
+  selector:
+    app: appex-database
+  type: ClusterIP

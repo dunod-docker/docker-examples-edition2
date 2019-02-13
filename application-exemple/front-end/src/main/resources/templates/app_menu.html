@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head th:replace="layout.html :: header (titre='Menu principal')">
+    </head>
+    <body>
+    	<div th:replace="layout.html :: menu"></div>
+    	<div class="container-fluid" style="margin-top: 2em;">
+    		<div class="row">
+    			<div class="col">
+    				<h1 class="text-center" style="margin-bottom: 1em;">Choisissez l'une des fonctions ci-dessous</h1>
+    			</div>
+    		</div>
+    		<div class="row">
+    			<div class="col-6">
+					<div class="card">
+					  <div class="card-body">
+					    <h3 class="card-title">Chargement</h3>
+					    <p class="card-text">Cette fonction permet de charger (upload) les formulaires sous format CSV.<br/>
+					    Ceux-ci seront ensuite analysés de manière asynchrone.</p>
+					    <a th:href="@{/formulaire_chargement}" class="btn btn-primary">Charger</a>
+					  </div>
+					</div>
+    			</div>
+    			<div class="col-6">
+    				<div class="card">
+					  <div class="card-body">
+					    <h3 class="card-title">Visualisation</h3>
+					    <p class="card-text">Cette fonction permet de visualiser les formulaires en attente et les données extraites des formulaires traités.<br/>
+					    Les données sont affichées sous la forme d'un tableau.</p>
+					    <a th:href="@{/visualisation}" class="btn btn-primary">Visualiser</a>
+					  </div>
+					</div>
+    			</div>
+    		</div>
+        </div>
+        <div th:replace="layout.html :: footer"></div>
+    </body>
+</html>

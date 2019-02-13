@@ -1,0 +1,27 @@
+
+docker run --rm -ti --name=centos-test -v ${PWD}:/opt/test centos:7
+# touch /opt/test/mylocalfile
+
+ls
+docker volume ls
+
+
+
+docker build -t volume-test .
+docker run -tid --name=myimage-test volume-test
+docker volume ls
+DRIVER              VOLUME NAME
+local               d2d1ef75f6fb63bbcd9e81db347617ba87c35569df9e66d19d9752ff87aabf37
+ 
+docker exec -ti myimage-test /bin/bash
+touch /opt/test/thisismyfile
+docker stop myimage-test
+docker rm myimage-test
+
+
+$ls /var/lib/docker/volumes/d2d1ef75f6fb63bbcd9e81db347617ba87c35569df9e66d19d9752ff87aabf37/_data
+
+docker volume create portainer_data
+docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+
+

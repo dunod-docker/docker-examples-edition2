@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: quelleheure
+spec:
+  containers:
+    - image: ${DOCKER_HUB_ACCOUNT}/quelleheure:v4
+      name: quelleheure
+      volumeMounts:
+        - mountPath: "/data"
+          name: log-data-cross-nodes
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+  volumes:
+  - name: log-data-cross-nodes
+    persistentVolumeClaim:
+      claimName: shared-volume-claim

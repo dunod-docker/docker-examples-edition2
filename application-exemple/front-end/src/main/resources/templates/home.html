@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head th:replace="layout.html :: header (titre='Home')">
+    </head>
+    <body>
+    	<div th:replace="layout.html :: menu"></div>
+        <div class="jumbotron" style="margin-top: 2em;">
+		  <h1 class="display-4">Bienvenue !</h1>
+		  <p class="lead">Vous êtes sur la page d'accueil de l'application de gestion de formulaire Docker Dunod</p>
+		  <hr class="my-4">
+		  <a th:href="@{/app_menu}" class="btn btn-primary btn-lg">Menu principal</a>
+		</div>
+        <div th:replace="layout.html :: footer"></div>
+    </body>
+</html>

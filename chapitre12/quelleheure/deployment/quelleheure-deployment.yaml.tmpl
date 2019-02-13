@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quelleheure-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: qh
+  template:
+    metadata:
+      labels:
+        app: qh
+    spec:
+      containers:
+        - image: ${DOCKER_HUB_ACCOUNT}/quelleheure:v4
+          name: quelleheure
+          volumeMounts:
+            - mountPath: "/data"
+              name: log-data-cross-nodes
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+      volumes:
+      - name: log-data-cross-nodes
+        persistentVolumeClaim:
+          claimName: shared-volume-claim
+
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head th:replace="layout.html :: header (titre='Chargement')">
+    </head>
+    <body>
+    	<div th:replace="layout.html :: menu"></div>
+        <div class="container-fluid" style="margin-top: 2em;">
+            <div class="row">
+    			<div class="col">
+    				<h1 class="text-center" style="margin-bottom: 1em;">Chargement d'un nouveau formulaire</h1>
+    			</div>
+    		</div>
+            <div class="row">
+            	<div class="col-3">
+            	</div>
+    			<div class="col-6">
+					<div class="card">
+					  <div class="card-body">
+					  	<p class="card-text">Attention le format du fichier doit être celui de la base de l'INSEE 
+					  	<a href="https://www.data.gouv.fr/fr/datasets/data-insee-sur-les-communes/">https://www.data.gouv.fr/fr/datasets/data-insee-sur-les-communes/</a></p>
+					    <form th:action="@{/chargement}" enctype="multipart/form-data" method="post">
+						  <div class="form-group">
+						    <label for="fichier">Fichier :</label>
+						    <input type="file" class="form-control-file" id="fichier" name="fichier">
+						  </div>
+						  <input type="submit" class="btn btn-lg btn-primary" value="Charger"/>
+						</form>
+					  </div>
+					</div>
+    			</div>
+    			<div class="col-3">
+            	</div>
+    		</div>
+        </div>
+        <div th:replace="layout.html :: footer"></div>
+    </body>
+</html>

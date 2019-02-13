@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: quelleheure
+spec:
+  volumes:
+    - name: "log-data"
+      hostPath:
+        path: "/tmp/sauvegarde"
+  containers:
+    - image: ${DOCKER_HUB_ACCOUNT}/quelleheure:v3
+      name: quelleheure
+      volumeMounts:
+        - mountPath: "/data"
+          name: "log-data"
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+

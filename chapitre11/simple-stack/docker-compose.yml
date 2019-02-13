@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  web:
+    image: nginx
+    ports:
+      - "8081:80"
+    volumes:
+      - "$PWD/nginx/nginx.conf:/etc/nginx/nginx.conf"
+    deploy:
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == manager]
+    depends_on:
+      - php-fpm
+    networks:
+      - stack-net
+  
+  php-fpm:
+    image: bitnami/php-fpm
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    networks:
+      - stack-net
+  
+networks:
+  stack-net:

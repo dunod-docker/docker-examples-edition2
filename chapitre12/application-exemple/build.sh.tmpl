@@ -1,0 +1,39 @@
+#!/bin/bash
+
+ORIGINDIR=$PWD
+BASEDIR=$(dirname $0)
+
+cd $BASEDIR
+
+# Compilation de l'application front-end
+../../application-exemple/build/basique/build.sh
+sudo chown $(whoami):$(whoami) *.jar
+mv *.jar front-end
+cp ../../application-exemple/front-end/config-a-remplacer/application.properties front-end
+python ../../application-exemple/build/replacer/replacer.py global.properties front-end/application.properties
+
+# Copie de l'application back-end python
+cp ../../application-exemple/back-end/main.py back-end
+cp ../../application-exemple/back-end/config-a-remplacer/config.json back-end
+python ../../application-exemple/build/replacer/replacer.py global.properties back-end/config.json
+
+# Copie du schema SQL
+cp ../../application-exemple/database/schema.sql database
+
+# Build de l'image "base de données"
+docker build -t ${DOCKER_HUB_ACCOUNT}/k8-database database
+
+# Build du front-end
+docker build -t ${DOCKER_HUB_ACCOUNT}/k8-front-end front-end
+
+# Build du back-end
+docker build -t ${DOCKER_HUB_ACCOUNT}/k8-back-end back-end
+
+# Nettoyage
+rm database/schema.sql
+rm back-end/main.py
+rm back-end/config.json
+rm front-end/application.properties
+rm front-end/*.jar
+docker system prune -f
+

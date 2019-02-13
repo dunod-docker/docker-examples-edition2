@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: quelleheure
+spec:
+  containers:
+    - image: ${DOCKER_HUB_ACCOUNT}/quelleheure:v2
+      name: quelleheure
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+

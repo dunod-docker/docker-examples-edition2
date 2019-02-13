@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head th:replace="layout.html :: header (titre='Visualisation')">
+    </head>
+    <body>
+    	<div th:replace="layout.html :: menu"></div>
+        <div class="container-fluid" style="margin-top: 2em;">
+            <div class="row">
+    			<div class="col">
+    				<h1 class="text-center" style="margin-bottom: 1em;">Visualisation des données</h1>
+    			</div>
+    		</div>
+       		<div class="row">
+       			<div class="col">
+       				<div class="card">
+	       				<div class="card-body">
+	       					<h3 class="card-title">En attente de traitement</h3>
+	       					<p class="card-text">Le fichiers suivants ont été chargés mais n'ont pas encore été traités.</p>
+	       					
+	       					<table th:if="${fichiers.size() != 0}" class="table">
+							  <thead class="thead-light">
+							    <tr>
+							      <th scope="col">Fichier</th>
+							      <th scope="col">Heure de chargement</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr th:each="fichier: ${fichiers}">
+							      <td th:text="${fichier.nom}"></td>
+							      <td th:text="${#dates.format(fichier.derniereModification, 'dd-MM-yyyy HH:mm')}"></td>
+							    </tr>
+							  </tbody>
+							</table>
+							<div th:if="${fichiers.size() == 0}" class="alert alert-warning" role="alert">
+							Aucun fichier en attente
+							</div>
+	       				</div>
+       				</div>
+       			</div>
+       		</div>
+       		<div class="row">
+       			<div class="col">
+       			&nbsp;
+       			</div>
+       		</div>
+			<div class="row">
+       			<div class="col">
+       				<div class="card">
+	       				<div class="card-body">
+	       					<h3 class="card-title">Données en base</h3>
+	       					<p class="card-text">Les données suivants sont issues des fichiers chargés qui ont été traités.</p>
+	       					<table th:if="${departements.size() != 0}" class="table">
+							  <thead class="thead-light">
+							    <tr>
+							      <th scope="col">Département</th>
+							      <th scope="col">Population totale</th>
+							      <th scope="col">Commune la plus peuplée</th>
+							      <th scope="col">Commune la moins peuplée</th>
+							      <th scope="col">Nombre d'hotels</th>
+							      <th scope="col">Mise à jour</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr th:each="departement: ${departements}">
+							      <td th:text="${departement.code}"></td>
+							      <td th:text="${departement.population}"></td>
+							      <td th:text="${departement.communePlusGrande}"></td>
+							      <td th:text="${departement.communePlusPetite}"></td>
+							      <td th:text="${departement.nombreHotel}"></td>
+							      <td th:text="${departement.lastUpdate}"></td>
+							    </tr>
+							  </tbody>
+							</table>
+							<div th:if="${departements.size() == 0}" class="alert alert-warning" role="alert">
+							Aucune donnée disponible
+							</div>
+	       				</div>
+       				</div>
+       			</div>
+       		</div>
+        </div>
+        <div th:replace="layout.html :: footer"></div>
+    </body>
+</html>

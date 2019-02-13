@@ -1,0 +1,5 @@
+{
+    "formulaire.app.chemin.chargement.fichiers" : "/chargement",
+    "formulaire.app.clef.api" : "${api.key}",
+    "formulaire.app.url.api" : "http://${front-end.host}/insere_departement"
+}

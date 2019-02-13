@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-db
+spec:
+  containers:
+    - image: ${DOCKER_HUB_ACCOUNT}/k8-database
+      name: init-db
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+      volumeMounts:
+        - mountPath: "/opt/data"
+          name: mysql-files
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 3306
+          name: mysql
+          protocol: TCP
+  volumes:
+    - name: mysql-files
+      persistentVolumeClaim:
+        claimName: database-volume-claim

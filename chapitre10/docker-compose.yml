@@ -1,0 +1,39 @@
+version: "3"
+services:
+  gitlab:
+    build: "gitlab"
+    container_name: gitlab
+    ports:
+      - "80:80"
+      - "8122:22"
+    networks:
+      - ci-network
+    volumes:
+      - ci-gitlab-config-volume:/etc/gitlab
+      - ci-gitlab-log-volume:/var/log/gitlab
+      - ci-gitlab-data-volume:/var/opt/gitlab
+  
+  jenkins:
+    build: "jenkins"
+    container_name: jenkins
+    hostname: jenkins
+    networks:
+      - ci-network
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ci-jenkins-home:/var/jenkins_home
+      - ci-jenkins-build:/opt/build
+
+networks:
+  ci-network:
+
+volumes:
+  ci-gitlab-config-volume:
+  ci-gitlab-log-volume:
+  ci-gitlab-data-volume:
+  ci-jenkins-home:
+  ci-jenkins-build:
+
