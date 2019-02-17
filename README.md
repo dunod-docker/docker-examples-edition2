@@ -1,4 +1,4 @@
-# Exemples Docker Dunod
+# Exemples Docker Dunod (2ième édition)
 
 Contenu de chaque sous répertoire:
 
