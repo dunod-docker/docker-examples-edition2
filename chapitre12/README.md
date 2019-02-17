@@ -1,5 +1,34 @@
 # Chapitre 12
 
+- [PRISE EN MAIN](#prise-en-main)
+    - [IMPORTANT : Installation des exemples](#important--installation-des-exemples)
+    - [Kubectl :  la CLI de Kubernetes](#kubectl---la-cli-de-kubernetes)
+    - [Un exemple simple](#un-exemple-simple)
+    - [Un descripteur Kubernetes](#un-descripteur-kubernetes)
+- [DECOUVERTE DES FONCTIONNALITES](#decouverte-des-fonctionnalites)
+    - [Ajout d’un état : écriture sur un volume host](#ajout-dun-tat--criture-sur-un-volume-host)
+        - [Lancement du pod et description](#lancement-du-pod-et-description)
+        - [Ajoutons un volume](#ajoutons-un-volume)
+    - [Influencer le scheduler Kubernetes : les labels](#influencer-le-scheduler-kubernetes--les-labels)
+        - [Définition d’un label](#dfinition-dun-label)
+        - [Définition des exigences pour un pod](#dfinition-des-exigences-pour-un-pod)
+    - [Persistent volumes : la persistance gérée par Kubernetes](#persistent-volumes--la-persistance-gre-par-kubernetes)
+        - [Création du secret Kubernetes pour l’authentification](#cration-du-secret-kubernetes-pour-lauthentification)
+        - [Création des objets Kubernetes et du Pod](#cration-des-objets-kubernetes-et-du-pod)
+    - [Haute disponibilité basique et avancée](#haute-disponibilit-basique-et-avance)
+        - [Résilience automatique](#rsilience-automatique)
+        - [Réplicas : gestion de plusieurs pods au sein d’un même déploiement](#rplicas--gestion-de-plusieurs-pods-au-sein-dun-mme-dploiement)
+        - [Services : répartition de charge](#services--rpartition-de-charge)
+        - [Auto-scaling : montée et répartition de charge automatique](#auto-scaling--monte-et-rpartition-de-charge-automatique)
+- [DÉPLOIEMENT DE L’APPLICATION EXEMPLE](#dploiement-de-lapplication-exemple)
+    - [Nettoyage](#nettoyage)
+    - [Build et publication des images](#build-et-publication-des-images)
+    - [Création des volumes](#cration-des-volumes)
+    - [Configuration et déploiement des composants](#configuration-et-dploiement-des-composants)
+        - [Pre-initialisation de la base de données](#pre-initialisation-de-la-base-de-donnes)
+        - [Lancement des autres composants et test](#lancement-des-autres-composants-et-test)
+- [Liens (dans l'ordre d'apparition dans le chapitre)](#liens-dans-lordre-dapparition-dans-le-chapitre)
+
 ## PRISE EN MAIN
 
 ### IMPORTANT : Installation des exemples
