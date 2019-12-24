@@ -15,7 +15,7 @@ RUN yum install -y epel-release && \
 ARG MYSQL_ROOT_PASSWORD
 
 # Execute le script d'installation de MariaDB et donne les droits à l'utilisateur mysql
-RUN /usr/bin/mysql_install_db --user=mysql \
+RUN /usr/bin/mysql_install_db --user=mysql --force \
     && chown -R mysql:mysql /var/lib/mysql
 #Copie du schema.sql et création
 COPY schema.sql /schema.sql
