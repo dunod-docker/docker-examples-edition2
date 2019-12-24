@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.143
+FROM jenkins/jenkins:2.210
 
 #Installation du client Docker sous l'utilisateur root
 USER root
