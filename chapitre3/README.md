@@ -38,7 +38,7 @@ usermod -aG docker vagrant
 #### Le client docker (socat)
 ```
 sudo yum install -y socat
-socat -v UNIX-LISTEN:/tmp/socatproxy.sock,fork,reuseaddr UNIX-CONNECT:/var/run/docker.sock &
+socat -v UNIX-LISTEN:/tmp/socatproxy.sock UNIX-CONNECT:/var/run/docker.sock &
 docker -H unix:///tmp/socatproxy.sock ps -a
 ```
 
