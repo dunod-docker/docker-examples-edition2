@@ -51,7 +51,7 @@ docker exec -ti jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 /opt/build/scripts/start-build.sh ${BUILD_TAG} 
 /opt/build/scripts/build-java.sh ${BUILD_TAG} 
-/opt/build/scripts/build-configure.sh ${BUILD_TAG} “DEV”
+/opt/build/scripts/build-configure.sh ${BUILD_TAG} "DEV"
 /opt/build/scripts/build-front-end-image.sh ${BUILD_TAG} 
 ```
 
