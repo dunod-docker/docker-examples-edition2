@@ -11,7 +11,7 @@ file_put_contents("/data/logs.txt", $log, FILE_APPEND);
 <p>Il semble que je sois installé sur un hôte nommé : <?php echo(gethostname());  ?></p>
 <p><u>Derniers accès à cette page</u></p>
 <?php
-if ($file = fopen("/data/log.txt", "r")) {
+if ($file = fopen("/data/logs.txt", "r")) {
     while(!feof($file)) {
         $line = fgets($file);
         ?>
